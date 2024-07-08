@@ -1,59 +1,50 @@
-/* import 'package:myapp/models/stock.dart';
-
-class Product{
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1329582442.
-  final int id;
+class Product {
+  final String id;
   final String name;
-  final int quantity;
-  final List<Stock> stocks;
+  final int price;
+  final int qty;
+  final String attr;
+  final int weight;
 
   Product({
     required this.id,
     required this.name,
-    required this.quantity,
-    required this.stocks,
+    required this.price,
+    required this.qty,
+    required this.attr,
+    required this.weight,
   });
 
-  Product copyWith({
-    int? id,
-    String? name,
-    int? quantity,
-    List<Stock>? stocks,
-  }) {
+  factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      quantity: quantity ?? this.quantity,
-      stocks: stocks ?? this.stocks,
+      id: json['id'],
+      name: json['name'],
+      price: json['price'],
+      qty: json['qty'],
+      attr: json['attr'],
+      weight: json['weight'],
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
-      'quantity': quantity,
-      'stocks': stocks.map((x) => x.toMap()).toList(),
+      'price': price,
+      'qty': qty,
+      'attr': attr,
+      'weight': weight,
     };
   }
 
-  factory Product.fromMap(Map<String, dynamic> map) {
+  static fromMap(Map<String, dynamic> x) {
     return Product(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      quantity: map['quantity'] as int,
-      stocks: List<Stock>.from(
-        (map['stocks'] as List<int>).map<Stock>(
-          (x) => Stock.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      id: x['id'],
+      name: x['name'],
+      price: x['price'],
+      qty: x['qty'],
+      attr: x['attr'],
+      weight: x['weight'],
     );
   }
-
-  String toJson() =>
-      'Product(id: $id, name: $name, quantity: $quantity, stocks: $stocks)';
-
-  @override
-  String toString() => 'Product(id: $id, name: $name, quantity: $quantity, stocks: $stocks)';
 }
-*/

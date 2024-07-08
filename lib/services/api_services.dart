@@ -1,59 +1,66 @@
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:2660938046.
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:myapp/models/product.dart'; // Sesuaikan dengan path model produk Anda
 
 class ApiServices {
-  // Base URL for the API
-  static const String baseUrl = 'kartel.api.dev/swagger';
+  // Base URL untuk API
+  static const String baseUrl = 'kartel.api.dev'; // Ganti dengan base URL sesuai API Anda
 
-  // Headers for the API requests
+  // Headers untuk request API
   static const Map<String, String> headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   };
 
-  // Function to make a GET request
-  static Future<dynamic> get(String endpoint) async {
-    final response = await http.get(Uri.parse('$baseUrl/$endpoint'), headers: headers);
+  // Fungsi untuk melakukan GET request
+  static Future<List<Product>> getProducts() async {
+    final response = await http.get(Uri.https(baseUrl, '/products'), headers: headers);
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      Iterable list = jsonDecode(response.body);
+      return List<Product>.from(list.map((model) => Product.fromJson(model)));
     } else {
-      throw Exception('Failed to get data from API');
+      throw Exception('Gagal mengambil data dari API');
     }
   }
 
-  // Function to make a POST request
-  static Future<dynamic> post(String endpoint, Map<String, dynamic> body) async {
-    final response = await http.post(Uri.parse('$baseUrl/$endpoint'), headers: headers, body: jsonEncode(body));
+  // Fungsi untuk melakukan POST request
+  static Future<Product> addProduct(Product product) async {
+    final response = await http.post(
+      Uri.https(baseUrl, '/products'),
+      headers: headers,
+      body: jsonEncode(product.toJson()),
+    );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      return Product.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to post data to API');
+      throw Exception('Gagal menambahkan produk melalui API');
     }
   }
 
-  // Function to make a PUT request
-  static Future<dynamic> put(String endpoint, Map<String, dynamic> body) async {
-    final response = await http.put(Uri.parse('$baseUrl/$endpoint'), headers: headers, body: jsonEncode(body));
+  // Fungsi untuk melakukan PUT request
+  static Future<Product> updateProduct(Product product) async {
+    final response = await http.put(
+      Uri.https(baseUrl, '/products/${product.id}'),
+      headers: headers,
+      body: jsonEncode(product.toJson()),
+    );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      return Product.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to put data to API');
+      throw Exception('Gagal memperbarui produk melalui API');
     }
   }
 
-  // Function to make a DELETE request
-  static Future<dynamic> delete(String endpoint) async {
-    final response = await http.delete(Uri.parse('$baseUrl/$endpoint'), headers: headers);
+  // Fungsi untuk melakukan DELETE request
+  static Future<void> deleteProduct(String productId) async {
+    final response = await http.delete(Uri.https(baseUrl, '/products/$productId'), headers: headers);
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Failed to delete data from API');
+    if (response.statusCode != 200) {
+      throw Exception('Gagal menghapus produk dari API');
     }
   }
 }
