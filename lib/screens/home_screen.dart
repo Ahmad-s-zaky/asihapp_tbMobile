@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 40),
             const Center(
               child: Text(
-                'Asih App is an app use for eat delightfull food. And also you can add some food by your own and get selled it',
+                'Asih App is an app use for eat delightfull food. And also you can add some food by your own',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

@@ -8,28 +8,29 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: onTap,
-      selectedItemColor: Colors.green, // Warna ikon yang dipilih
-      unselectedItemColor: Colors.grey, // Warna ikon yang tidak dipilih
-      items: const [
-        BottomNavigationBarItem(
+    return NavigationBar(
+      selectedIndex: currentIndex,
+      onDestinationSelected: onTap,
+      backgroundColor: Colors.green, // Background color
+      indicatorColor: Colors.green[300],
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+      destinations: const[
+         NavigationDestination(
           icon: Icon(Icons.home),
           label: 'Home',
         ),
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: Icon(Icons.storage),
           label: 'Stock',
         ),
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: Icon(Icons.production_quantity_limits),
           label: 'Produksi',
         ),
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: Icon(Icons.store),
           label: 'Seller',
-        ),
+        )
       ],
     );
   }

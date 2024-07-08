@@ -4,6 +4,7 @@ import 'package:myapp/widgets/add_stock.dart';
 import 'package:myapp/widgets/edit_stock.dart';
 import 'package:provider/provider.dart';
 
+// ignore: use_key_in_widget_constructors
 class StockScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,14 +14,14 @@ class StockScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Text(
+          const Text(
             'STOCK',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Expanded(
             child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
@@ -37,13 +38,13 @@ class StockScreen extends StatelessWidget {
                         Text(
                           '${stock.name}\n[${stock.quantity}]',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.edit),
+                              icon: const Icon(Icons.edit),
                               onPressed: () {
                                 showDialog(
                                   context: context,
@@ -52,26 +53,26 @@ class StockScreen extends StatelessWidget {
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               onPressed: () {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    title: Text('Confirm Delete'),
-                                    content: Text('Are you sure you want to delete this stock?'),
+                                    title: const Text('Confirm Delete'),
+                                    content: const Text('Are you sure you want to delete this stock?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('Cancel'),
+                                        child: const Text('Cancel'),
                                       ),
                                       TextButton(
                                         onPressed: () {
                                           stockService.deleteStock(index);
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('Delete'),
+                                        child: const Text('Delete'),
                                       ),
                                     ],
                                   ),
@@ -88,7 +89,7 @@ class StockScreen extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.add_box),
+            icon: const Icon(Icons.add_box, size: 35,),
             onPressed: () {
               showDialog(
                 context: context,
