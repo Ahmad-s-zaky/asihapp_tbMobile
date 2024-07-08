@@ -24,16 +24,12 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    StockScreen(),
-    // Other screens can be added here
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -47,31 +43,30 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Asih App'),
         centerTitle: true,
+        backgroundColor: Colors.green,
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.green,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+      bottomNavigationBar: NavigationBar(
+        destinations: const <NavigationDestination>[
+          NavigationDestination(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.inventory_2),
             label: 'Stock',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.conveyor_belt),
-            label: 'Stock',
+            label: 'Product',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.storefront),
             label: 'Seller',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        onTap: _onItemTapped,
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onItemTapped,
       ),
     );
   }

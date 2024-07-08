@@ -5,7 +5,7 @@ class Stock {
 
   Stock({
     required this.id,
-    required this.name,
+    required this.name, 
     required this.quantity,
   });
 

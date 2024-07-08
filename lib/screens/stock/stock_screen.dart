@@ -33,12 +33,12 @@ class StockScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Card(
                     color: Colors.green[300],
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Icon(
                           Icons.inventory_2,
-                          size: 80,
+                          size: 60,
                           color: Colors.green,
                         ),
                         Text(
@@ -62,9 +62,9 @@ class StockScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 Icon(
                   Icons.edit,
                   size: 40,
