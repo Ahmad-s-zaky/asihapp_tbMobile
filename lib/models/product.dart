@@ -1,4 +1,4 @@
-import 'package:myapp/models/stock.dart';
+/* import 'package:myapp/models/stock.dart';
 
 class Product{
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1329582442.
@@ -56,3 +56,4 @@ class Product{
   @override
   String toString() => 'Product(id: $id, name: $name, quantity: $quantity, stocks: $stocks)';
 }
+*/

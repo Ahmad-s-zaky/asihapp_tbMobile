@@ -1,45 +1,38 @@
 class Stock {
-  final int id;
+  final String id;
   final String name;
   final int quantity;
+  final String attr;
+  final int weight;
 
   Stock({
     required this.id,
-    required this.name, 
+    required this.name,
     required this.quantity,
+    required this.attr,
+    required this.weight,
   });
 
-  Stock copyWith({
-    int? id,
-    String? name,
-    int? quantity,
-  }) {
+  factory Stock.fromJson(Map<String, dynamic> json) {
     return Stock(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      quantity: quantity ?? this.quantity,
+      id: json['id'],
+      name: json['name'],
+      quantity: json['qty'],
+      attr: json['attr'],
+      weight: json['weight'],
+      
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
-      'quantity': quantity,
+      'qty': quantity,
+      'attr': attr,
+      'weight': weight,
     };
   }
 
-  factory Stock.fromMap(Map<String, dynamic> map) {
-    return Stock(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      quantity: map['quantity'] as int,
-    );
-  }
-
-  String toJson() =>
-      'Stock(id: $id, name: $name, quantity: $quantity)';
-
-  @override
-  String toString() => 'Stock(id: $id, name: $name, quantity: $quantity)';
+  static fromMap(Map<String, dynamic> x) {}
 }

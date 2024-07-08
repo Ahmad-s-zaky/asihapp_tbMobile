@@ -1,39 +1,61 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
+
+import 'package:myapp/services/stock_services.dart';
+import 'package:myapp/screens/home_screen.dart';
+/*
+import 'package:myapp/screens/product/produksi_screen.dart';
+import 'package:myapp/screens/seller/seller_screen.dart';
+*/
 import 'package:myapp/screens/stock/stock_screen.dart';
+import 'package:provider/provider.dart';
+import 'widgets/bottom_nav_bar.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Asih App',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => StockService()),
+      ],
+      child: MaterialApp(
+        title: 'Asih App',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: MainScreen(),
       ),
-      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
+// ignore: use_key_in_widget_constructors
+class MainScreen extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
-  _MyHomePageState createState() => _MyHomePageState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
+class _MainScreenState extends State<MainScreen> {
+  int _currentIndex = 0;
 
-  void _onItemTapped(int index) {
+  final List<Widget> _screens = [
+    HomeScreen(),
+    StockScreen(),
+    /*
+    ProduksiScreen(),
+    SellerScreen(),
+    */
+  ];
+
+  void _onTabTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _currentIndex = index;
     });
   }
 
@@ -41,32 +63,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Asih App'),
+        title: Text('Asih App', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: NavigationBar(
-        destinations: const <NavigationDestination>[
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.inventory_2),
-            label: 'Stock',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.conveyor_belt),
-            label: 'Product',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.storefront),
-            label: 'Seller',
-          ),
-        ],
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
       ),
     );
   }
