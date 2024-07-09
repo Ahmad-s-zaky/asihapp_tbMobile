@@ -5,6 +5,7 @@ import 'package:myapp/widgets/add_product.dart';
 import 'package:myapp/widgets/edit_product.dart';
 import 'package:provider/provider.dart';
 
+// ignore: use_key_in_widget_constructors
 class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,8 @@ class ProductScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PRODUCT'),
+        title: const Text('PRODUCT', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -47,6 +49,7 @@ class ProductScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
+                              // ignore: unnecessary_string_interpolations
                               '${product.name}',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
@@ -118,6 +121,7 @@ class ProductScreen extends StatelessWidget {
             builder: (context) => AddProductDialog(),
           );
         },
+        // ignore: sort_child_properties_last
         child: const Icon(Icons.add),
         backgroundColor: Colors.green,
       ),
