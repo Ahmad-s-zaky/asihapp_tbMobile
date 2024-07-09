@@ -5,7 +5,7 @@ import 'package:myapp/models/product.dart'; // Sesuaikan dengan path model produ
 
 class ApiServices {
   // Base URL untuk API
-  static const String baseUrl = 'kartel.api.dev'; // Ganti dengan base URL sesuai API Anda
+  static const String baseUrl = 'api.kartel.dev'; // Ganti dengan base URL sesuai API Anda
 
   // Headers untuk request API
   static const Map<String, String> headers = {
@@ -15,7 +15,8 @@ class ApiServices {
 
   // Fungsi untuk melakukan GET request
   static Future<List<Product>> getProducts() async {
-    final response = await http.get(Uri.https(baseUrl, '/products'), headers: headers);
+    final response =
+        await http.get(Uri.https(baseUrl, '/products'), headers: headers);
 
     if (response.statusCode == 200) {
       Iterable list = jsonDecode(response.body);
@@ -57,7 +58,8 @@ class ApiServices {
 
   // Fungsi untuk melakukan DELETE request
   static Future<void> deleteProduct(String productId) async {
-    final response = await http.delete(Uri.https(baseUrl, '/products/$productId'), headers: headers);
+    final response = await http
+        .delete(Uri.https(baseUrl, '/products/$productId'), headers: headers);
 
     if (response.statusCode != 200) {
       throw Exception('Gagal menghapus produk dari API');
